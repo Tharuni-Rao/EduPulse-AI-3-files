@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EduPulse AI | Student Portal</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <div class="logo">EduPulse <span>AI</span></div>
+    <div class="tagline">Learn · Improve · Grow</div>
+    <div class="menu-label">STUDENT MENU</div>
+    <button class="menu-btn active" data-page="dashboard">◈ &nbsp; DASHBOARD</button>
+    <button class="menu-btn" data-page="attendance">◷ &nbsp; ATTENDANCE</button>
+    <button class="menu-btn" data-page="marks">▤ &nbsp; SUBJECTS MARKS</button>
+    <button class="menu-btn" data-page="notes">▣ &nbsp; SUBJECT NOTES</button>
+    <button class="menu-btn" data-page="placement">✦ &nbsp; PLACEMENT</button>
+    <button class="menu-btn" data-page="feedback">✉ &nbsp; STUDENT FEEDBACK</button>
+    <div class="sidebar-bottom">
+      <div class="menu-label">MY ACCOUNT</div>
+      <div class="profile-menu">
+        <button class="menu-btn" data-page="profile">● &nbsp; MY PROFILE</button>
+        <button class="menu-btn" id="logoutBtn">↪ &nbsp; LOGOUT</button>
+      </div>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <div>
+        <h1 id="pageTitle">Student Dashboard</h1>
+        <p id="pageSubtitle">Your personal learning and academic overview.</p>
+      </div>
+      <div class="user-chip">Student: <strong id="headerName">Arjun Kumar</strong><br>
+        ID: <strong id="headerId">ST001</strong></div>
+    </header>
+
+    <section id="dashboard" class="page open">
+      <div class="card hero">
+        <h2 id="welcomeName">Welcome, Arjun! 👋</h2>
+        <p>Track your attendance, understand your subject performance, learn from visual notes and prepare for placements.</p>
+        <button class="btn" data-go="attendance">View Attendance</button>
+        <button class="btn secondary" data-go="marks">View Subject Marks</button>
+      </div>
+      <h2 class="section-title">Your Academic Overview</h2>
+      <div class="grid">
+        <div class="stat"><div class="stat-label">Attendance</div><div class="stat-value" id="dashAttendance">90%</div><div class="muted">Based on recorded classes</div></div>
+        <div class="stat"><div class="stat-label">Subject Average</div><div class="stat-value" id="dashAverage">76%</div><div class="muted">Across five subjects</div></div>
+        <div class="stat"><div class="stat-label">Strongest Subject</div><div class="stat-value" id="dashHighest">Maths</div><div class="muted" id="dashHighestNote">92/100 marks</div></div>
+      </div>
+      <div class="card"><h2>📌 Your Learning Checklist</h2>
+        <p class="muted">1. Keep attendance at or above your institution's requirement.<br>
+        2. Review your lowest-scoring subject each week.<br>
+        3. Practise Python and Java coding regularly.<br>
+        4. Use SUBJECT NOTES to revise important concepts.</p>
+      </div>
+    </section>
+
+    <section id="attendance" class="page">
+      <div class="card">
+        <h2>My Attendance Performance</h2>
+        <p class="muted">Attendance report for the sample demo student.</p>
+        <div class="stat-value" id="attPercent">90%</div>
+        <div class="track"><div id="attBar" class="fill green-fill" style="width:90%"></div></div>
+        <div class="grid">
+          <div class="stat"><div class="stat-label">Present Classes</div><div class="stat-value" id="attPresent">45</div></div>
+          <div class="stat"><div class="stat-label">Absent Classes</div><div class="stat-value" id="attAbsent">5</div></div>
+          <div class="stat"><div class="stat-label">Total Classes</div><div class="stat-value" id="attTotal">50</div></div>
+        </div>
+        <div id="attStatus" class="notice">✓ Attendance meets the 75% target. Continue attending regularly.</div>
+        <h3 class="section-title">How many more classes to reach 75%?</h3>
+        <div class="card inner-card"><p id="attTarget">You have already reached the 75% target based on this record.</p>
+          <p class="muted space-top">Assumption: you attend every future class. Your institution may have different attendance rules.</p></div>
+      </div>
+    </section>
+
+    <section id="marks" class="page">
+      <div class="grid">
+        <div class="stat"><div class="stat-label">Overall Average</div><div class="stat-value" id="marksAverage">76%</div></div>
+        <div class="stat"><div class="stat-label">Highest Subject</div><div class="stat-value" id="marksHighest">Maths</div><div class="muted" id="marksHighestNote">92/100</div></div>
+        <div class="stat"><div class="stat-label">Needs More Focus</div><div class="stat-value" id="marksLowest">BEE</div><div class="muted" id="marksLowestNote">58/100</div></div>
+      </div>
+      <h2 class="section-title">Subject-wise Marks</h2>
+      <div id="subjectMarks" class="subject-grid"></div>
+      <div class="card space-top"><h2>📊 Marks Comparison</h2><div id="marksGraph" class="grid"></div></div>
+      <div class="card"><h2>🎯 Improvement Plan</h2><p id="improvementPlan" class="muted"></p></div>
+    </section>
+
+    <section id="notes" class="page">
+      <div class="card">
+        <h2>📚 Subject Notes</h2>
+        <p class="muted">Select a subject and topic to learn with simple explanations, formulas and highlighted points.</p>
+        <div id="noteTabs" class="tabs"></div>
+        <div class="field"><label for="topicSelect">Choose topic</label><select id="topicSelect"></select></div>
+        <div id="notesContent" class="note-grid"></div>
+        <div class="card space-top"><h2>Quick Quiz</h2><div id="quizContent"></div>
+          <button class="btn" id="checkQuizBtn">Check Answer</button><p id="quizResult" class="muted space-top"></p></div>
+        <button class="btn" id="printNotesBtn">Print / Save Notes</button>
+        <div class="notice warning">These are prepared sample notes, not live AI-generated answers. Check your official syllabus and class materials.</div>
+      </div>
+    </section>
+
+    <section id="placement" class="page">
+      <div class="card hero"><h2>💼 Placement Preparation</h2><p>Review your Java and Python marks and build a plan to improve your coding and interview skills.</p></div>
+      <div class="grid">
+        <div class="stat"><div class="stat-label">Java Marks</div><div class="stat-value" id="placeJava">67/100</div></div>
+        <div class="stat"><div class="stat-label">Python Marks</div><div class="stat-value" id="placePython">88/100</div></div>
+        <div class="stat"><div class="stat-label">Coding Academic Average</div><div class="stat-value" id="placeAverage">78%</div></div>
+      </div>
+      <div class="card"><h2>Readiness Indicator</h2><p class="muted">A simple academic indicator based on Java and Python marks only. It is not a prediction of placement probability.</p>
+        <div class="stat-value" id="readinessLabel">Developing academic indicator</div>
+        <div class="track"><div class="fill blue-fill" id="readinessBar" style="width:78%"></div></div>
+        <p class="muted" id="readinessExplanation">This score is calculated only from Java and Python marks. It does not estimate the probability of getting hired.</p></div>
+      <div class="card"><h2>🚀 Skills to Improve</h2><div id="placementPlan" class="muted"></div></div>
+      <div class="card"><h2>Suggested Weekly Roadmap</h2>
+        <div class="achievement"><strong>Day 1–2:</strong> Revise Java/Python basics, variables, conditions and loops.</div>
+        <div class="achievement"><strong>Day 3–4:</strong> Practise arrays/lists, strings, functions and problem solving.</div>
+        <div class="achievement"><strong>Day 5:</strong> Learn basic data structures and time complexity.</div>
+        <div class="achievement"><strong>Day 6:</strong> Practise aptitude and explain one project aloud.</div>
+        <div class="achievement"><strong>Day 7:</strong> Take a timed coding quiz and review mistakes.</div>
+        <div class="notice warning">Placement outcomes depend on coding tests, communication, projects, eligibility and interview performance—not marks alone.</div>
+      </div>
+    </section>
+
+    <section id="feedback" class="page">
+      <div class="card"><h2>✉ Student Subject Feedback</h2><p class="muted">Feedback is saved in this browser only.</p>
+        <form id="feedbackForm">
+          <div class="field"><label for="feedbackSubject">Subject</label><select id="feedbackSubject" required>
+            <option>Maths</option><option>BEE</option><option>AEP</option><option>Python</option><option>Java</option></select></div>
+          <div class="field"><label>How helpful was this subject's teaching?</label>
+            <div class="rating">
+              <label><input type="radio" name="rating" value="1" required> 1</label>
+              <label><input type="radio" name="rating" value="2"> 2</label>
+              <label><input type="radio" name="rating" value="3"> 3</label>
+              <label><input type="radio" name="rating" value="4"> 4</label>
+              <label><input type="radio" name="rating" value="5"> 5</label>
+            </div><p class="muted">1 = Needs improvement, 5 = Very helpful</p>
+          </div>
+          <div class="field"><label for="feedbackText">Your feedback / doubts</label><textarea id="feedbackText" maxlength="1000" placeholder="Tell us which topics are difficult or what would help you learn better." required></textarea></div>
+          <button class="btn" type="submit">Submit Feedback</button>
+        </form><p id="feedbackMessage" class="notice hidden"></p>
+      </div>
+      <div class="card"><h2>Your Submitted Feedback (This Browser)</h2><div id="feedbackHistory" class="muted">No feedback submitted yet.</div></div>
+    </section>
+
+    <section id="profile" class="page">
+      <div class="profile-layout">
+        <div class="card center">
+          <div id="avatar" class="avatar">AK</div><h2 id="profileDisplayName">Arjun Kumar</h2>
+          <p class="muted">Student ID: <span id="profileDisplayId">ST001</span></p>
+          <label for="photoUpload">Choose profile photo</label><input id="photoUpload" type="file" accept="image/*">
+          <button class="btn secondary" id="printProfileBtn">Print Profile</button>
+        </div>
+        <div>
+          <div class="card"><h2>👤 My Profile</h2><p class="muted">Edit this sample profile. Changes stay in this page/browser demo.</p>
+            <form id="profileForm">
+              <div class="field"><label for="firstName">First Name</label><input id="firstName" value="Arjun" required></div>
+              <div class="field"><label for="surname">Surname</label><input id="surname" value="Kumar" required></div>
+              <div class="field"><label for="phone">Phone Number</label><input id="phone" type="tel" value="9000000000" placeholder="Your phone number"></div>
+              <div class="field"><label for="email">Email ID</label><input id="email" type="email" value="arjun@example.com" required></div>
+              <div class="field"><label for="branch">Branch / Course</label><input id="branch" value="Computer Science"></div>
+              <button class="btn" type="submit">Update Profile</button>
+            </form><p id="profileMessage" class="muted space-top"></p>
+          </div>
+          <div class="card"><h2>🏆 Achievements</h2>
+            <div class="achievement">📘 <strong>Learning Progress:</strong> Subject notes available for five subjects.</div>
+            <div class="achievement">💻 <strong>Coding Goal:</strong> Complete regular Java and Python practice.</div>
+            <div class="achievement">🎯 <strong>Personal Goal:</strong> Improve your lowest-scoring subject.</div>
+            <p class="muted">These are demo achievements/goals. Replace them with verified achievements earned by the student.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <div class="footer">EduPulse AI · Student Portal · Demo Version</div>
+  </main>
+</div>
+</body>
+</html>
